@@ -9,33 +9,34 @@
 <body>
 <div class="container">
     <h1 class="mb-2" th:text="${update != null ?'Update Employee' : 'Add Employee'}"/>
-    <form th:action="@{${update !=null ? '/employees/update' : '/employees/add'}}" th:object="${employee}" method="POST"
-          class="">
-        <input type="hidden" th:field="*{id}" th:if="${update}">
+    <form class="" method="POST" th:action="@{${update !=null ? '/employees/update' : '/employees/add'}}"
+          th:object="${employee}">
+        <input th:field="*{id}" th:if="${update}" type="hidden">
         <div class="mb-3">
-            <label for="firstname" class="form-label">Firstname: </label>
-            <input type="text" id="firstname" th:field="*{firstName}" class="form-control"
-                   placeholder="Enter the Firstname">
-            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="form-text text-danger"></span>
+            <label class="form-label" for="firstname">Firstname: </label>
+            <input class="form-control" id="firstname" placeholder="Enter the Firstname" th:field="*{firstName}"
+                   type="text">
+            <span class="form-text text-danger" th:errors="*{firstName}"
+                  th:if="${#fields.hasErrors('firstName')}"></span>
         </div>
         <div class="mb-3">
-            <label for="lastname" class="form-label">Lastname: </label>
-            <input type="text" id="lastname" th:field="*{lastName}" class="form-control"
-                   placeholder="Enter the Lastname">
-            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="form-text text-danger"></span>
+            <label class="form-label" for="lastname">Lastname: </label>
+            <input class="form-control" id="lastname" placeholder="Enter the Lastname" th:field="*{lastName}"
+                   type="text">
+            <span class="form-text text-danger" th:errors="*{lastName}" th:if="${#fields.hasErrors('lastName')}"></span>
         </div>
         <div class="mb-3">
-            <label for="email" class="form-label">Email: </label>
-            <input type="text" id="email" th:field="*{email}" class="form-control" placeholder="Enter the Email">
-            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="form-text text-danger"></span>
+            <label class="form-label" for="email">Email: </label>
+            <input class="form-control" id="email" placeholder="Enter the Email" th:field="*{email}" type="text">
+            <span class="form-text text-danger" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></span>
         </div>
-        <button type="submit" class="btn btn-success"
-                th:text="${update != null ?'Update Employee' : 'Add Employee'}"></button>
+        <button class="btn btn-success" th:text="${update != null ?'Update Employee' : 'Add Employee'}"
+                type="submit"></button>
     </form>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+<script crossorigin="anonymous"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

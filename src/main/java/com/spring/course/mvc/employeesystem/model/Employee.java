@@ -22,7 +22,7 @@ public class Employee {
     private Integer id;
 
     @NotNull(message = "First Name is Required")
-    @Size(min = 5,message = "Must be Minimum of 5 Characters Long!")
+    @Size(min = 5, message = "Must be Minimum of 5 Characters Long!")
     @Column(name = "first_name")
     private String firstName;
 
