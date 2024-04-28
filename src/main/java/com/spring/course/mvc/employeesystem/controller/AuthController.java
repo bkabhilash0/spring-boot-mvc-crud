@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthController {
     @GetMapping("/login")
     public String login() {
-
         return "auth/login";
+    }
+
+    @GetMapping("/error")
+    public String error() {
+        return "auth/error";
     }
 }

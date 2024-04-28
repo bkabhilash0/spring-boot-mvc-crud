@@ -36,8 +36,8 @@
             <td th:text="*{lastName}"/>
             <td th:text="*{email}"/>
             <td>
-                <a class="btn btn-secondary" th:href="@{/employees/update(employeeId=*{id})}">Update</a>
-                <a class="btn btn-danger" th:href="@{/employees/delete(employeeId=*{id})}">Delete</a>
+                <a sec:authorize="hasRole('MANAGER')" class="btn btn-secondary" th:href="@{/employees/update(employeeId=*{id})}">Update</a>
+                <a sec:authorize="hasRole('ADMIN')" class="btn btn-danger" th:href="@{/employees/delete(employeeId=*{id})}">Delete</a>
             </td>
         </tr>
         </tbody>

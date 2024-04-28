@@ -7,7 +7,11 @@ import org.springframework.security.config.annotation.web.configurers.LogoutConf
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfiguration {
@@ -35,11 +39,20 @@ public class SecurityConfiguration {
         return new InMemoryUserDetailsManager(john, mary, susan);
     }
 
+//    @Bean
+//    public UserDetailsManager userDetailsManager(DataSource datasource) {
+//        JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(datasource);
+//        userDetailsManager.setUsersByUsernameQuery("SELECT");
+//        return userDetailsManager;
+//    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer ->
                         configurer
                                 .requestMatchers("/auth/login").anonymous()
+                                .requestMatchers("/employees/update/**").hasAnyRole("MANAGER","ADMIN")
+                                .requestMatchers("/employees/delete/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 ).formLogin(form ->
                         form
@@ -49,6 +62,7 @@ public class SecurityConfiguration {
                                 .permitAll()
 
                 )
+                .exceptionHandling(configurer -> configurer.accessDeniedPage("/auth/error"))
                 .logout(LogoutConfigurer::permitAll);
 
         return http.build();
